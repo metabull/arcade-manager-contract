@@ -51,6 +51,20 @@ cp .env.example .env
 
 ## Development and Testing
 
+### Checking Your Setup
+
+To verify your environment is properly set up:
+
+```bash
+node check-setup.js
+```
+
+This utility will check if:
+- All dependencies are installed
+- Contracts compile successfully
+- .env file is configured correctly
+- Hardhat node is running (if needed)
+
 ### Compiling Contracts
 
 To compile the smart contracts:
@@ -66,9 +80,7 @@ This will create the contract artifacts in the `artifacts/` directory.
 Start the local Hardhat node:
 
 ```bash
-npm run hardhat-node
-# or directly
-npx hardhat node
+node hardhat-node.js
 ```
 
 In another terminal, run the tests:
