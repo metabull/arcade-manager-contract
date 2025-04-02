@@ -1,0 +1,52 @@
+modules = ["nodejs-20"]
+
+[nix]
+channel = "stable-24_05"
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "SmartContractServer"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "hardhat-tests"
+
+[[workflows.workflow]]
+name = "SmartContractServer"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "packager.installForAll"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm install @openzeppelin/contracts @nomiclabs/hardhat-waffle @nomiclabs/hardhat-ethers @nomiclabs/hardhat-etherscan ethereum-waffle chai ethers dotenv hardhat && npx hardhat node"
+waitForPort = 8545
+
+[[workflows.workflow]]
+name = "hardhat-tests"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "packager.installForAll"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm install --save-dev hardhat @nomiclabs/hardhat-waffle @nomiclabs/hardhat-ethers @nomiclabs/hardhat-etherscan ethereum-waffle chai ethers dotenv && npx hardhat test"
+
+[deployment]
+run = ["sh", "-c", "npm install @openzeppelin/contracts @nomiclabs/hardhat-waffle @nomiclabs/hardhat-ethers @nomiclabs/hardhat-etherscan ethereum-waffle chai ethers dotenv hardhat && npx hardhat node"]
