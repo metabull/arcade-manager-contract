@@ -42,3 +42,15 @@ coverageEnv
 # Hardhat Directories
 .hardhat/
 .openzeppelin/
+
+# Replit specific files
+.replit
+replit.nix
+.config/
+.upm/
+.cache/
+.breakpoints
+.settings
+.replitcredentials.json
+.generated_icon.png
+*.replit.app
