@@ -3,7 +3,8 @@ const fs = require('fs');
 const path = require('path');
 
 // Configure a local provider running at the standard port
-const provider = new ethers.providers.JsonRpcProvider('http://localhost:8545');
+// Use 0.0.0.0 instead of localhost to ensure it works in Replit
+const provider = new ethers.providers.JsonRpcProvider('http://0.0.0.0:8545');
 
 // Helper function to load contract artifacts
 function loadArtifact(contractName) {
