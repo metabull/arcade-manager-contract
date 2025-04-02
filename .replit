@@ -13,14 +13,38 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
-args = "SmartContractServer"
+args = "compile-contracts"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
-args = "hardhat-tests"
+args = "run-tests"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "deploy-contract"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "hardhat-node"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "deploy-local"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "compile"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "start-node"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "check-setup"
 
 [[workflows.workflow]]
-name = "SmartContractServer"
+name = "compile-contracts"
 author = "agent"
 
 [workflows.workflow.metadata]
@@ -31,11 +55,10 @@ task = "packager.installForAll"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "npm install @openzeppelin/contracts @nomiclabs/hardhat-waffle @nomiclabs/hardhat-ethers @nomiclabs/hardhat-etherscan ethereum-waffle chai ethers dotenv hardhat && npx hardhat node"
-waitForPort = 8545
+args = "node compile.js"
 
 [[workflows.workflow]]
-name = "hardhat-tests"
+name = "run-tests"
 author = "agent"
 
 [workflows.workflow.metadata]
@@ -46,7 +69,95 @@ task = "packager.installForAll"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "npm install --save-dev hardhat @nomiclabs/hardhat-waffle @nomiclabs/hardhat-ethers @nomiclabs/hardhat-etherscan ethereum-waffle chai ethers dotenv && npx hardhat test"
+args = "node run-tests.js"
+
+[[workflows.workflow]]
+name = "deploy-contract"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "packager.installForAll"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "node deploy.js"
+
+[[workflows.workflow]]
+name = "hardhat-node"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "packager.installForAll"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo 'n' | npx hardhat node"
+
+[[workflows.workflow]]
+name = "deploy-local"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "packager.installForAll"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "node deploy-local.js"
+
+[[workflows.workflow]]
+name = "compile"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "packager.installForAll"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "node compile.js"
+
+[[workflows.workflow]]
+name = "start-node"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "packager.installForAll"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "node hardhat-node.js"
+
+[[workflows.workflow]]
+name = "check-setup"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "packager.installForAll"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "node check-setup.js"
 
 [deployment]
 run = ["sh", "-c", "npm install @openzeppelin/contracts @nomiclabs/hardhat-waffle @nomiclabs/hardhat-ethers @nomiclabs/hardhat-etherscan ethereum-waffle chai ethers dotenv hardhat && npx hardhat node"]
+
+[[ports]]
+localPort = 8545
+externalPort = 80

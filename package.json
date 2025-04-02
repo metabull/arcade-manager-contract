@@ -13,7 +13,9 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@openzeppelin/contracts": "^5.2.0"
+    "@openzeppelin/contracts": "^4.9.3",
+    "mocha": "^11.1.0",
+    "solc": "^0.8.29"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.2.3",

@@ -1,4 +1,7 @@
+// Disable telemetry
 process.env.HARDHAT_TELEMETRY_OPTOUT = 1;
+// Auto-accept telemetry prompt with "false" to avoid hanging
+process.env.HARDHAT_PROMPT = "false";
 
 require("@nomiclabs/hardhat-waffle");
 require("@nomiclabs/hardhat-ethers");
